@@ -11,12 +11,11 @@
 
     <div class="chat">
         <div class="upper">
-            <div class="m">
-                <div class="us">
-                    <div class="un">sam</div>
-                    <div class="te">1</div>
-                </div>
-                <div class="us connect">joined</div>                
+            <div class="m" id="m">
+                <!-- <div class="us" id="us">
+                    <div class="un"></div>
+                    <div class="te" id="te"></div>
+                </div> -->
 
             </div>
             
@@ -28,8 +27,8 @@
 
         </div>
         <div class="lower">
-            <form class="lf" action="/chat" method="POST">
-                <input class="type" name="message">
+            <form class="lf" id="form" action="/chat" method="POST">
+                <input class="type" required name="message" id="message">
                 <button class="send" type="submit"><svg class="svg"width="40px" height="40px" viewBox="-2.4 -2.4 28.80 28.80" fill="none" xmlns="http://www.w3.org/2000/svg" transform="matrix(-1, 0, 0, 1, 0, 0)rotate(0)"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#00ff00" stroke-width="0.528"></g><g id="SVGRepo_iconCarrier"> <path d="M14.4376 15.3703L12.3042 19.5292C11.9326 20.2537 10.8971 20.254 10.525 19.5297L4.24059 7.2971C3.81571 6.47007 4.65077 5.56156 5.51061 5.91537L18.5216 11.2692C19.2984 11.5889 19.3588 12.6658 18.6227 13.0704L14.4376 15.3703ZM14.4376 15.3703L5.09594 6.90886" stroke="#00ff00" stroke-width="2" stroke-linecap="round"></path> </g></svg></button>
             </form>
         </div>
@@ -37,4 +36,46 @@
 
     
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+<script type="text/javascript" charset="utf-8">
+
+let socketio = io();
+socketio.on('connect', function() {
+
+    socketio.emit('status', {data: 'ok'});
+    fo=document.getElementById("form").onsubmit=(function(e){
+        e.preventDefault()
+        mess=document.getElementById("message")
+        u=mess.value.trim()
+        socketio.emit("send",{u})
+        mess.value=""
+        mess.focus()
+    })
+    
+});
+socketio.on("restatus",function(d1){
+    joi=document.createElement("div")
+    joi.classList.add("usconnect")
+    joi.innerText=d1['user_name']+" joined!"
+    k=document.getElementById("m")
+    k.append(joi)
+})
+socketio.on("recive",function(u){
+    de=document.createElement("div")
+    de.classList.add("te")
+    de.innerText=u['u']
+    na=document.createElement("div")
+    na.classList.add("un")
+    na.innerText=u['name']
+    us=document.createElement("div")
+    us.classList.add('us')
+    us.append(na)
+    us.append(de) 
+    k = document.getElementById("m")
+    k.append(us)
+
+
+
+})
+</script>
 </html>
