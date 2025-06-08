@@ -1,4 +1,4 @@
-from flask import Flask,request,session,url_for,render_template
+from flask import Flask,request,redirect,session,url_for,render_template
 
 from flask_socketio import SocketIO
 
@@ -12,9 +12,18 @@ socketio=SocketIO(app)
 
 def main():
     if request.method=="POST":
-        print(request.form["username"])
-    return render_template("index.html")
+        session['username']=(request.form["username"])
+        return render_template("chat.html")
 
+    return render_template("index.html")
+@app.route("/chat",methods=["POST","GET"])
+def chat():
+    if(session.get('username')!=None):
+        print("ok")
+
+    else:
+        print(session.get("username"))
+        return redirect(url_for("main"))
 if __name__=="__main__":
     socketio.run(app,debug=True)
 
