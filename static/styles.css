@@ -2,6 +2,7 @@ body{
     display: flex;
     place-content: center;
     background-color: rgb(0, 0, 0);
+    font-family: 'Courier New', Courier, monospace;
 }
 
 .login{
@@ -34,17 +35,35 @@ form{
     width: 200px;
     background-color: transparent;
     border: none;
-    border-bottom:2px solid black;
+    color: white;
+    border-bottom:2px solid rgba(0, 255, 255, 0.386);
     font-size: larger;
 }
 .in:focus{
     outline: none;
 }
 button{
+    place-content: center;
+    text-align: center;
+    align-items: center;
+    padding: 2px;
     height: 40px;
+    font-size: 22px;
     border-radius: 1rem;
     width: 100px;
+    outline: none;
+    border: none;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    background-color: transparent;
+    border:2px solid rgba(0, 255, 255, 0.491);
+    
 
+}
+button:hover{
+    background-color: aliceblue;
+    color: black;
+    transition:all 1s;
 }
 @media(max-width:700px){
     body{
