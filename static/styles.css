@@ -1,4 +1,10 @@
+*{
+    cursor: crosshair;
+}
+
 body{
+
+    
     overflow: hidden;
     display: flex;
     place-content: center;
@@ -81,10 +87,11 @@ body{
     display: none;
 }
 .upper{
-    overflow: scroll;
-    top: 0;
+    gap: 4dvh;
+    display: grid;
     height: 85dvh;
-    
+    place-content: center;
+    align-items: center;    
 }
 .lower{
     border-top: 2px solid cyan;
@@ -134,6 +141,43 @@ body{
     align-items: center;
     text-align: center;
     border-radius:5rem;
+}
+.m::-webkit-scrollbar{
+    display: none;
+}
+.m{
+    display: flex;
+    flex-direction: column;
+   
+    
+    font-size: x-large;
+    height: 80dvh;
+    width: 80dvw;
+    overflow: scroll;
+    gap: 10px;
+    border-radius: 1.2rem;
+    padding: 1rem;
+    color: white;
+    font-weight: bold;
+}
+.us{
+    display: flex;
+    border-radius: 1.2rem;
+    gap: 10px;
+    position: relative;
+    border: 2px solid cyan;
+    padding: 1rem;
+}
+.us.connect{
+    border: none;
+    place-content: center;
+    font-size: medium;
+}
+.un{
+    margin: 0;
+}
+.ut{
+    padding: 10px;
 }
 @media(max-width:700px){
     body{
