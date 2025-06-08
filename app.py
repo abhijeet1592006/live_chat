@@ -48,5 +48,5 @@ def message(u):
     u1={'u':u['u'],"name":user_name}
     socketio.emit("recive",u1)
 if __name__=="__main__":
-    socketio.run(app,debug=True)
+    socketio.run(app,host='0.0.0.0')
 
